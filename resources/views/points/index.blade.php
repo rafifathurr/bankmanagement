@@ -38,9 +38,6 @@
                 var token = '{{csrf_token()}}';
 
                 $('#dataTable').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    destroy: true,
                     "ajax": {
                         "url": "{{ route('points.scopeData') }}",
                         "type": "POST",
@@ -63,6 +60,10 @@
                     ],
                     order: [[2, 'desc']],
                 });
+
+                setInterval(() => {
+                    $('#dataTable').DataTable().ajax.reload(null, false);
+                }, 5000);
             });
         </script>
     </body>
